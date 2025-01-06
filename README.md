@@ -72,8 +72,8 @@ This setup uses Docker volumes for persistent and shared data storage:
 - **POST** `/register/`: Register a new user.  
 - **POST** `/login/`: Authenticate a user.  
 - **GET** `/users/<id>`: Retrieve user details.  
-- **PUT** `/users/<id>`: Edit user details.  
-- **DELETE** `/users/<id>`: Delete a user.  
+- **PUT** `/users/<id>`: Edit an existing blog post.  
+- **DELETE** `/users/<id>`: Delete a specific blog.  
 
 ### Blog Service  
 
