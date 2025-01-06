@@ -65,6 +65,31 @@ This setup uses Docker volumes for persistent and shared data storage:
    o Purpose: Shares application code between the host and containers for development convenience.
 
 ---
+## API ENDPOINTS (that i have included in the project) 
+
+### User Service  
+
+- **POST** `/register/`: Register a new user.  
+- **POST** `/login/`: Authenticate a user.  
+- **GET** `/users/<id>`: Retrieve user details.  
+- **PUT** `/users/<id>`: Edit user details.  
+- **DELETE** `/users/<id>`: Delete a user.  
+
+### Blog Service  
+
+- **POST** `/blogs/`: Create a new blog post.  
+- **GET** `/blogs/`: List all blog posts.  
+- **GET** `/blogs/<id>`: Fetch a specific blog post.  
+- **PUT** `/blogs/<id>`: Edit an existing blog post.  
+- **DELETE** `/blogs/<id>`: Delete a specific blog post.  
+
+### Comment Service  
+
+- **POST** `/comments/`: Add a comment to a blog post.  
+- **GET** `/comments?post_id=<id>`: List comments for a specific blog post.  
+
+
+---
 
 **User Service**
 
