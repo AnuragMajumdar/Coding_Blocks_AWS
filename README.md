@@ -65,7 +65,7 @@ This setup uses Docker volumes for persistent and shared data storage:
    o Purpose: Shares application code between the host and containers for development convenience.
 
 ---
-## API ENDPOINTS (that i have included in the project) 
+## API Endpoints Used in My Project 
 
 ### User Service  
 
