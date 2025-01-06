@@ -1,0 +1,87 @@
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ${ENV_FILE:-.env.development}
+    ports:
+      - "5432:5432"
+    restart: always
+
+  migration:
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    env_file:
+      - ${ENV_FILE:-.env.development}  # Dynamically load env file based on ENV_FILE
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - db
+    entrypoint: ["/usr/bin/tini", "--"]
+    command: >
+      sh -c "./wait-for-it.sh db:5432 -- python manage.py migrate"
+    restart: "on-failure"
+
+  users:
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ${ENV_FILE:-.env.development}  # Dynamically load env file based on ENV_FILE
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - db
+      - migration
+    entrypoint: ["/usr/bin/tini", "--"]
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    restart: "on-failure"
+
+  blogs:
+    build:
+      context: ./blogs
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+    env_file:
+      - ${ENV_FILE:-.env.development}  # Dynamically load env file based on ENV_FILE
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - db
+      - migration
+    entrypoint: ["/usr/bin/tini", "--"]
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    restart: "on-failure"
+
+  comments:
+    build:
+      context: ./comments
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8000"
+    env_file:
+      - ${ENV_FILE:-.env.development}  # Dynamically load env file based on ENV_FILE
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - db
+      - migration
+    entrypoint: ["/usr/bin/tini", "--"]
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    restart: "on-failure"
+
+volumes:
+  postgres_data:
