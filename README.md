@@ -345,7 +345,7 @@ _________________________________________
 
 ---
 
-### **Final Deployment Documentation for Django Blog Platform on AWS (Using EC2 and RDS)**
+### **Deployment Documentation for Django Blog Platform on AWS (Using EC2 and RDS)**
 
 ---
 
